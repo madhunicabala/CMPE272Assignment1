@@ -73,7 +73,7 @@ def lambda_handler(event, context):
                  })
             }
         elif http_method == 'PATCH' and path == student_path:
-            # PUT request to update a student
+            # PATCH request to update a student record (only partial update using key, value pair)
             if not event.get('body'):
                 return {
                     'statusCode': 400,
@@ -103,7 +103,7 @@ def lambda_handler(event, context):
                 })
             }
         elif http_method == 'PUT' and path == student_path:
-            # PUT request to update a student
+            # PUT request to update a student record by sending all fields.
             if not event.get('body'):
                 return {
                     'statusCode': 400,
@@ -133,7 +133,7 @@ def lambda_handler(event, context):
                 'updated_attributes': response.get('Attributes', {})
                 })
             }
-        # DELETE request to remove a student
+        # DELETE request to remove a student using the key student_id
         elif http_method == 'DELETE' and path == student_path:
             request_body = json.loads(event['body'])
             # Ensure request body exists
